@@ -34,7 +34,7 @@ void ArrangeRow (int [,] array)
         {
             arr [j]=array[i,j];
         }
-        arr=arr.OrderBy(x => x).ToArray;
+        arr = arr.OrderBy(x => x).ToArray();
         for (int j=0; j<array.GetLength(1); j++)
         {
             array[i,j]=arr[j];
