@@ -20,12 +20,16 @@ string[] sizeS = ReadLine().Split('.', StringSplitOptions.RemoveEmptyEntries);
 int m = int.Parse(sizeS[0]);
 int n = int.Parse(sizeS[1]);
 int h = int.Parse(sizeS[2]);
-Print3DArray(Get3DArray(m,n,h));
+int [,,]array3D=Get3DArray(m,n,h);
+Print3DArray(array3D);
+
+FrequencyDictionary(array3D);
 
 
 int [,,] Get3DArray(int row, int column, int height)
 {
     int [,,] result=new int[row, column, height];
+    int count=0;
     for(int i=0; i<row; i++)
     {
         for(int j=0; j<column; j++)
@@ -33,9 +37,25 @@ int [,,] Get3DArray(int row, int column, int height)
             for(int k=0; k<height; k++)
             {
                 result[i,j,k]=new Random().Next(10,100);
+                
+                for(int a=i; a>-1; a--)
+                {
+                    for(int b=j; b>-1;b--)
+                    {
+                        for(int c=k-1; c>-1; c--)
+                        {
+                            {
+                                result[i,j,k]=new Random().Next(10,100);
+                                a=i; b=j; c=k; count++;
+                            }
+                        }
+                    }
+                }
+
             }
         }
     }
+    WriteLine(count);
     return result;
 }
 
@@ -54,27 +74,24 @@ void Print3DArray (int [,,] array)
     }
 }
 
-int [,,] NRepeatingElements(int [,,] array)
+
+void FrequencyDictionary(int [,,] array)
 {
-    for(int i=0; i<array.GetLength(0); i++)
+    int temp=0;
+    for(int k=10; k<100; k++)        
     {
-        for(int j=0; j<array.GetLength(1); j++)
+        int count=0;
+        for(int i=0; i<array.GetLength(0); i++)
         {
-            for(int k=0; k<array.GetLength(2); k++)
+            for(int j=0; j<array.GetLength(1); j++)
             {
-                int temp=array[i,j,k];
-                for(int i=0; i<array.GetLength(0); i++)
+                for(int a=0; a<array.GetLength(2); a++)
                 {
-                    for(int j=0; j<array.GetLength(1); j++)
-                    {
-                        for(int k=0; k<array.GetLength(2); k++)
-                        {
-                            if(temp==array[i,j,k])
-                        }
-                    }
-                }
+                    count+=k==array[i,j,a]? 1: 0;
+                }           
             }
         }
+        
+       if(count!=0) WriteLine($"{temp+=1}=>{k} встречается {count} раз");
     }
-    return array;
 }
