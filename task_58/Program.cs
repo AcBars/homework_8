@@ -43,13 +43,13 @@ int [,] CompositionArr(int [,] arrA, int [,] arrB)
     {
         for(int j=0; j<result.GetLength(1); j++)
         {
-            result[i,j]=array(arrA, arrB, i, j).Sum();
+            result[i,j]=MultiplicationArray(arrA, arrB, i, j).Sum();
         }
     }
     return result;
 }
 
-int [] array(int [,] arrA, int [,] arrB, int k, int j)
+int [] MultiplicationArray(int [,] arrA, int [,] arrB, int k, int j)
 {
     int [] result=new int[arrA.GetLength(1)];
     for(int i=0; i<result.Length; i++)
