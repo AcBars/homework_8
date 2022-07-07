@@ -19,13 +19,18 @@ WriteLine("Введите размер матрицы B через пробел:
 string[] sizeB = ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
 int mB = int.Parse(sizeB[0]);
 int nB = int.Parse(sizeB[1]);
-int[,] array_B =Ex.GetArray(mB, nB, 0, 5);
+int[,] array_B =Ex.GetArray(mB, nB, 0, 10);
 Clear();
 Ex.PrintArray(array_A);
 WriteLine("=========");
 Ex.PrintArray(array_B);
-WriteLine("Произведение мартиц А и В рано:");
-Ex.PrintArray(CompositionArr(array_A, array_B));
+if(array_A.GetLength(1)==array_B.GetLength(0))
+
+{
+    WriteLine("Произведение мартиц А и В равно:");
+    Ex.PrintArray(CompositionArr(array_A, array_B));
+}
+else WriteLine("Данные матрицы нельзя перемножать!");
 
 
 
@@ -46,10 +51,10 @@ int [,] CompositionArr(int [,] arrA, int [,] arrB)
 
 int [] array(int [,] arrA, int [,] arrB, int k, int j)
 {
-    int [] result=new int[arrA.GetLength(0)];
+    int [] result=new int[arrA.GetLength(1)];
     for(int i=0; i<result.Length; i++)
     {
-        result[i]=arrA[i,k]*arrB[j,i];
+        result[i]=arrA[k,i]*arrB[i,j];
     }
     return result;
 }
